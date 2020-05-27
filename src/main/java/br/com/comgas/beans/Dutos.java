@@ -1,7 +1,5 @@
 package br.com.comgas.beans;
 
-import java.util.Date;
-
 /*
  * Objeto de mapeamento de dados (Base de Dutos)
  *
@@ -9,103 +7,103 @@ import java.util.Date;
 
 public class Dutos {
 
-	private int idTubo;
-	private Date dataInstalacao;
-	private int pressao;
-	private String unidadePressao;
-	private String latitude;
-	private String longitude;
-	private String nomeLogradouro;
-	private int qtdeClientes;
-	private int diametro;
-	private String unidadeDiametro;
-	private String material;
+	private Integer idTubo;
+	private java.util.Date dataInstalacao;
+	private Double pressao;
+	private java.lang.String unidadePressao;
+	private Double latitude;
+	private Double longitude;
+	private java.lang.String nomeLogradouro;
+	private java.lang.Integer qtdeClientes;
+	private java.lang.Integer diametro;
+	private java.lang.String unidadeDiametro;
+	private java.lang.String material;
 
-	public int getIdTubo() {
+	public Integer getIdTubo() {
 		return idTubo;
 	}
 
-	public void setIdTubo(int idTubo) {
+	public void setIdTubo(Integer idTubo) {
 		this.idTubo = idTubo;
 	}
 
-	public Date getDataInstalacao() {
+	public java.util.Date getDataInstalacao() {
 		return dataInstalacao;
 	}
 
-	public void setDataInstalacao(Date dataInstalacao) {
+	public void setDataInstalacao(java.util.Date dataInstalacao) {
 		this.dataInstalacao = dataInstalacao;
 	}
 
-	public int getPressao() {
+	public Double getPressao() {
 		return pressao;
 	}
 
-	public void setPressao(int pressao) {
+	public void setPressao(Double pressao) {
 		this.pressao = pressao;
 	}
 
-	public String getUnidadePressao() {
+	public java.lang.String getUnidadePressao() {
 		return unidadePressao;
 	}
 
-	public void setUnidadePressao(String unidadePressao) {
+	public void setUnidadePressao(java.lang.String unidadePressao) {
 		this.unidadePressao = unidadePressao;
 	}
 
-	public String getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
-	public String getNomeLogradouro() {
+	public java.lang.String getNomeLogradouro() {
 		return nomeLogradouro;
 	}
 
-	public void setNomeLogradouro(String nomeLogradouro) {
+	public void setNomeLogradouro(java.lang.String nomeLogradouro) {
 		this.nomeLogradouro = nomeLogradouro;
 	}
 
-	public int getQtdeClientes() {
+	public java.lang.Integer getQtdeClientes() {
 		return qtdeClientes;
 	}
 
-	public void setQtdeClientes(int qtdeClientes) {
+	public void setQtdeClientes(java.lang.Integer qtdeClientes) {
 		this.qtdeClientes = qtdeClientes;
 	}
 
-	public int getDiametro() {
+	public java.lang.Integer getDiametro() {
 		return diametro;
 	}
 
-	public void setDiametro(int diametro) {
+	public void setDiametro(java.lang.Integer diametro) {
 		this.diametro = diametro;
 	}
 
-	public String getUnidadeDiametro() {
+	public java.lang.String getUnidadeDiametro() {
 		return unidadeDiametro;
 	}
 
-	public void setUnidadeDiametro(String unidadeDiametro) {
+	public void setUnidadeDiametro(java.lang.String unidadeDiametro) {
 		this.unidadeDiametro = unidadeDiametro;
 	}
 
-	public String getMaterial() {
+	public java.lang.String getMaterial() {
 		return material;
 	}
 
-	public void setMaterial(String material) {
+	public void setMaterial(java.lang.String material) {
 		this.material = material;
 	}
 

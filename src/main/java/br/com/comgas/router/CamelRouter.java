@@ -8,6 +8,12 @@ import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jbpm.JBPMConstants;
 import org.apache.camel.model.rest.RestBindingMode;
+import org.kie.server.api.marshalling.MarshallingFormat;
+import org.kie.server.client.KieServicesClient;
+import org.kie.server.client.KieServicesConfiguration;
+import org.kie.server.client.KieServicesFactory;
+import org.kie.server.client.ProcessServicesClient;
+import org.kie.server.client.RuleServicesClient;
 import org.springframework.stereotype.Component;
 
 import br.com.comgas.beans.Dutos;
@@ -34,23 +40,36 @@ public class CamelRouter extends RouteBuilder {
 				.streamCaching()
 				.to("sql:SELECT * FROM DUTOS WHERE LATITUDE =:#Latitude AND LONGITUDE =:#Longitude?outputType=SelectOne&outputClass=br.com.comgas.beans.Dutos");
 
-		from("direct:calcular").process(new Processor() {
+		from("direct:calcular").process(new KieClientProcessor() {
 
 			@Override
 			public void process(Exchange ex) throws Exception {
 
 				Map<String, Object> params = new HashMap<>();
-				
-				params.put("Latitude",ex.getIn().getHeader("Latitude", Double.class));
-				params.put("Longitude",ex.getIn().getHeader("Longitude", Double.class));
-				params.put("Distancia", ex.getIn().getHeader("Distancia", Float.class));
-				params.put("Metodo",ex.getIn().getHeader("Metodo", String.class));
-				
-				ex.getMessage().setHeader(JBPMConstants.PARAMETERS, params);
+
+				params.put("Latitude", ex.getIn().getHeader("Latitude", Double.class));
+				params.put("Longitude", ex.getIn().getHeader("Longitude", Double.class));
+				params.put("Distancia", ex.getIn().getHeader("Distancia", Integer.class));
+				params.put("Metodo", ex.getIn().getHeader("Metodo", String.class));
+
+				Long instanceId = client.startProcess(CONTAINER_ID, PROCESS_ID, params);
+				ex.getMessage().setBody(instanceId);
+
+				System.out.println(">>>>> " + instanceId + " <<<<<");
 			}
-		}).setHeader(JBPMConstants.PROCESS_ID, constant("IPC.Processo_Priorizacao")).to(
-				"jbpm:http://localhost:8080/kie-server/services/rest/server?userName=pamAdmin&password=S3cr3tK3y#&deploymentId=ipc_1.0.0-SNAPSHOT")
-				.log("${body}");
+		}).log("${body}").process(new KieClientProcessor() {
+
+			@Override
+			public void process(Exchange ex) throws Exception {
+				try {
+					Object ipc = client.getProcessInstanceVariable(CONTAINER_ID, ex.getMessage().getBody(Long.class),
+							VARIABLE_IPC);
+					System.out.println(">>>> " + ipc);
+				} catch (Exception e) {
+					log.debug(e.getMessage());
+				}
+			}
+		});
 
 	}
 
