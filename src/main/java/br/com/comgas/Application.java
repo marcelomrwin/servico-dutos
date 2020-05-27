@@ -2,7 +2,6 @@ package br.com.comgas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 
 @SpringBootApplication

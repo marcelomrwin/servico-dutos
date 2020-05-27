@@ -150,3 +150,8 @@ $ mvn clean package
 $ mvn spring-boot:run
 ----
 . Go to link:http://localhost:8080[] and then follow the instructions on that page.
+
+=== Test data
+Latitude -23,5641874857
+Longitude -46,6225127759
+

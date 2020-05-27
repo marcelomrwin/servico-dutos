@@ -1,0 +1,4 @@
+br/com/comgas/Application.class
+br/com/comgas/beans/Dutos.class
+br/com/comgas/configuration/IndexRootMapper.class
+br/com/comgas/router/CamelRouter.class
