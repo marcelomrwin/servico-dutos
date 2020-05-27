@@ -1,4 +1,5 @@
 /Users/marcelosales/desenvolvimento/rhpam/comgas/servico-dutos/src/main/java/br/com/comgas/Application.java
+/Users/marcelosales/desenvolvimento/rhpam/comgas/servico-dutos/src/main/java/br/com/comgas/router/KieClientProcessor.java
 /Users/marcelosales/desenvolvimento/rhpam/comgas/servico-dutos/src/main/java/br/com/comgas/configuration/IndexRootMapper.java
 /Users/marcelosales/desenvolvimento/rhpam/comgas/servico-dutos/src/main/java/br/com/comgas/router/CamelRouter.java
 /Users/marcelosales/desenvolvimento/rhpam/comgas/servico-dutos/src/main/java/br/com/comgas/beans/Dutos.java

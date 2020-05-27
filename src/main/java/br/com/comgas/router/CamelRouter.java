@@ -62,11 +62,11 @@ public class CamelRouter extends RouteBuilder {
 			@Override
 			public void process(Exchange ex) throws Exception {
 				try {
-					Object ipc = client.getProcessInstanceVariable(CONTAINER_ID, ex.getMessage().getBody(Long.class),
-							VARIABLE_IPC);
-					System.out.println(">>>> " + ipc);
+//					Object ipc = client.getProcessInstanceVariable(CONTAINER_ID, ex.getMessage().getBody(Long.class),
+//							VARIABLE_IPC);
+//					System.out.println(">>>> " + ipc);
 				} catch (Exception e) {
-					log.debug(e.getMessage());
+					System.err.println(e.getMessage());
 				}
 			}
 		});
