@@ -1,19 +1,13 @@
 package br.com.comgas.router;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.jbpm.JBPMConstants;
 import org.apache.camel.model.rest.RestBindingMode;
-import org.kie.server.api.marshalling.MarshallingFormat;
-import org.kie.server.client.KieServicesClient;
-import org.kie.server.client.KieServicesConfiguration;
-import org.kie.server.client.KieServicesFactory;
-import org.kie.server.client.ProcessServicesClient;
-import org.kie.server.client.RuleServicesClient;
+import org.kie.server.api.model.instance.VariableInstance;
 import org.springframework.stereotype.Component;
 
 import br.com.comgas.beans.Dutos;
@@ -52,24 +46,18 @@ public class CamelRouter extends RouteBuilder {
 				params.put("Distancia", ex.getIn().getHeader("Distancia", Integer.class));
 				params.put("Metodo", ex.getIn().getHeader("Metodo", String.class));
 
-				Long instanceId = client.startProcess(CONTAINER_ID, PROCESS_ID, params);
-				ex.getMessage().setBody(instanceId);
-
-				System.out.println(">>>>> " + instanceId + " <<<<<");
+				Long instanceId = processClient.startProcess(CONTAINER_ID, PROCESS_ID, params);
+				
+				List<VariableInstance> variables = processClient.findVariablesCurrentState(CONTAINER_ID, instanceId);
+				String value = null;
+				for (VariableInstance variableInstance : variables) {
+					if (variableInstance.getVariableName().equalsIgnoreCase("ipc")) {
+						value = variableInstance.getValue();
+					}
+				}				
+				ex.getMessage().setBody(value);				
 			}
-		}).log("${body}").process(new KieClientProcessor() {
-
-			@Override
-			public void process(Exchange ex) throws Exception {
-				try {
-//					Object ipc = client.getProcessInstanceVariable(CONTAINER_ID, ex.getMessage().getBody(Long.class),
-//							VARIABLE_IPC);
-//					System.out.println(">>>> " + ipc);
-				} catch (Exception e) {
-					System.err.println(e.getMessage());
-				}
-			}
-		});
+		}).log("${body}");
 
 	}
 
